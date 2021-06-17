@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.4.0 (????-??-??)
+
+- Add support for Symfony 6
+
 ## 3.3.0 (2021-08-01)
 
 - Drop support for Symfony 5.2, it is no longer maintained

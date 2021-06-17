@@ -30,6 +30,11 @@ jobs:
             composer-flags: ''
             can-fail: true
             with-twig: true
+          - php: 8.0
+            symfony: 6.0.*@dev
+            composer-flags: ''
+            can-fail: true
+            with-twig: true
           - php: 8.1
             symfony: 5.3.*
             composer-flags: '--ignore-platform-req=php'
@@ -52,7 +57,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
-          tools: composer:v2
+          tools: composer:v2,flex
           extensions: curl, iconv, mbstring, pdo, pdo_sqlite, sqlite, zip
           coverage: none
 
@@ -61,10 +66,14 @@ jobs:
         run: |
           composer remove --dev --no-update pagerfanta/twig symfony/twig-bridge symfony/twig-bundle twig/twig
 
+      - name: Set JMSSerializerBundle to install from master
+        if: matrix.symfony == '6.0.*@dev'
+        run: |
+          composer require --dev --no-update jms/serializer-bundle:dev-master
+
       - name: Install dependencies
         run: |
-          composer global require --no-scripts --no-plugins symfony/flex
-          composer update ${{ matrix.composer-flags }} --prefer-dist --no-suggest
+          composer update ${{ matrix.composer-flags }} --prefer-dist
         env:
           SYMFONY_REQUIRE: ${{ matrix.symfony }}
 
