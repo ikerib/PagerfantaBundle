@@ -13,3 +13,12 @@ The bundle includes:
 - Default CSS for the `Pagerfanta\View\DefaultView` class
 
 <div class="docs-note">The documentation covers only the features added by this bundle, please review the Pagerfanta documentation for more information about how to use the library.</div>
+
+## Support Matrix
+
+The below table shows the supported PHP and Symfony versions for this bundle. Note that there is not a 1.x version of this bundle, the previous `WhiteOctoberPagerfantaBundle` should be considered the 1.x version.
+
+| Version | Status                                       | PHP Versions | Symfony Versions  |
+| ------- | -------------------------------------------- | ------------ | ----------------- |
+| 2.x     | Bug & Security Fixes Until December 31, 2021 | 7.2-8.0      | 3.4, 4.4, 5.3-5.4 |
+| 3.x     | Actively Supported                           | 7.4+         | 4.4, 5.3-5.4      |
