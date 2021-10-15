@@ -3,32 +3,27 @@
 namespace BabDev\PagerfantaBundle\Serializer\Normalizer;
 
 use Pagerfanta\PagerfantaInterface;
-use Symfony\Component\Serializer\Normalizer\ArrayDenormalizer;
+use Symfony\Component\Serializer\Exception\InvalidArgumentException;
+use Symfony\Component\Serializer\Normalizer\CacheableSupportsMethodInterface;
+use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
+use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-if (method_exists(ArrayDenormalizer::class, 'setSerializer')) {
-    /**
-     * Compatibility class supporting Symfony 5.4 and earlier.
-     *
-     * @internal
-     */
-    abstract class PagerfantaCompatNormalizer extends PagerfantaSymfony5Normalizer
-    {
-    }
-} else {
-    /**
-     * Compatibility class supporting Symfony 6.0 and later.
-     *
-     * @internal
-     */
-    abstract class PagerfantaCompatNormalizer extends PagerfantaSymfony6Normalizer
-    {
-    }
-}
-
-final class PagerfantaNormalizer extends PagerfantaCompatNormalizer
+final class PagerfantaNormalizer implements NormalizerInterface, CacheableSupportsMethodInterface, NormalizerAwareInterface
 {
-    protected function doNormalize(PagerfantaInterface $object, string $format = null, array $context = []): array
+    use NormalizerAwareTrait;
+
+    /**
+     * @param mixed $object Object to normalize
+     *
+     * @throws InvalidArgumentException when the object given is not a supported type for the normalizer
+     */
+    public function normalize($object, string $format = null, array $context = []): array
     {
+        if (!$object instanceof PagerfantaInterface) {
+            throw new InvalidArgumentException(sprintf('The object must be an instance of "%s".', PagerfantaInterface::class));
+        }
+
         return [
             'items' => $this->normalizer->normalize($object->getIterator(), $format, $context),
             'pagination' => [
