@@ -18,7 +18,7 @@ final class PagerfantaNormalizer implements NormalizerInterface, CacheableSuppor
      *
      * @throws InvalidArgumentException when the object given is not a supported type for the normalizer
      */
-    public function normalize($object, string $format = null, array $context = []): array
+    public function normalize($object, $format = null, array $context = []): array
     {
         if (!$object instanceof PagerfantaInterface) {
             throw new InvalidArgumentException(sprintf('The object must be an instance of "%s".', PagerfantaInterface::class));
