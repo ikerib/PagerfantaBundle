@@ -15,6 +15,8 @@ The bundle includes:
 
 <div class="docs-note">The documentation covers only the features added by this bundle, please review the Pagerfanta documentation for more information about how to use the library.</div>
 
+Want to see a real-world example of this in a screencast? Check out: https://symfonycasts.com/pagerfanta
+
 ## Support Matrix
 
 The below table shows the supported PHP and Symfony versions for this bundle. Note that there is not a 1.x version of this bundle, the previous `WhiteOctoberPagerfantaBundle` should be considered the 1.x version.
