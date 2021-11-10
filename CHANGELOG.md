@@ -1,6 +1,6 @@
 # Changelog
 
-## 3.4.0 (????-??-??)
+## 3.4.0 (2021-11-09)
 
 - Add support for Symfony 6
 
