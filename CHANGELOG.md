@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.5.0 (????-??-??)
+
+- Deprecate public access to the `pagerfanta.route_generator_factory` and `pagerfanta.view_factory` services
+
 ## 3.4.0 (2021-11-09)
 
 - Add support for Symfony 6
