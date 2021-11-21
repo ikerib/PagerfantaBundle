@@ -1,6 +1,6 @@
 # Changelog
 
-## 3.5.0 (????-??-??)
+## 3.5.0 (2021-11-21)
 
 - Deprecate public access to the `pagerfanta.route_generator_factory` and `pagerfanta.view_factory` services
 - Give a better error message if trying to use Twig functions when `pagerfanta/twig` is not installed
