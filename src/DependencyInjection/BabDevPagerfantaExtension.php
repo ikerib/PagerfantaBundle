@@ -33,8 +33,14 @@ final class BabDevPagerfantaExtension extends Extension implements PrependExtens
         /** @var array<string, class-string<BundleInterface>> $bundles */
         $bundles = $container->getParameter('kernel.bundles');
 
-        if (isset($bundles['TwigBundle']) && class_exists(PagerfantaExtension::class)) {
+        if (isset($bundles['TwigBundle'])) {
             $loader->load('twig.xml');
+
+            if (!class_exists(PagerfantaExtension::class)) {
+                $container->removeDefinition('pagerfanta.twig_extension');
+                $container->removeDefinition('pagerfanta.twig_runtime');
+                $container->removeDefinition('pagerfanta.view.twig');
+            }
         }
 
         if (isset($bundles['JMSSerializerBundle'])) {

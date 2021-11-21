@@ -4,6 +4,7 @@ namespace BabDev\PagerfantaBundle;
 
 use BabDev\PagerfantaBundle\DependencyInjection\BabDevPagerfantaExtension;
 use BabDev\PagerfantaBundle\DependencyInjection\CompilerPass\RegisterPagerfantaViewsPass;
+use BabDev\PagerfantaBundle\DependencyInjection\CompilerPass\RegisterTwigUndefinedCallablePass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
@@ -14,6 +15,7 @@ final class BabDevPagerfantaBundle extends Bundle
         parent::build($container);
 
         $container->addCompilerPass(new RegisterPagerfantaViewsPass());
+        $container->addCompilerPass(new RegisterTwigUndefinedCallablePass());
     }
 
     public function getContainerExtension()

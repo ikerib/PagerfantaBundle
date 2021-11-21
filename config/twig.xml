@@ -18,6 +18,9 @@
             <tag name="twig.runtime" />
         </service>
 
+        <!-- Twig Undefined Callable Handler -->
+        <service id="pagerfanta.undefined_callable_handler" class="BabDev\PagerfantaBundle\Twig\UndefinedCallableHandler" public="false" />
+
         <!-- Pagerfanta View -->
         <service id="pagerfanta.view.twig" class="Pagerfanta\Twig\View\TwigView" public="false">
             <argument type="service" id="twig" />
