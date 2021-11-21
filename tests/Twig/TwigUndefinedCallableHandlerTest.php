@@ -8,6 +8,13 @@ use Twig\Error\SyntaxError;
 
 final class TwigUndefinedCallableHandlerTest extends TestCase
 {
+    public static function setUpBeforeClass(): void
+    {
+        if (!class_exists(SyntaxError::class)) {
+            self::markTestSkipped('Test requires Twig');
+        }
+    }
+
     public function dataSupportedFunctions(): \Generator
     {
         yield '"pagerfanta" function' => ['pagerfanta'];
