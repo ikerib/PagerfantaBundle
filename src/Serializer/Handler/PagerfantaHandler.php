@@ -7,10 +7,11 @@ use JMS\Serializer\Handler\SubscribingHandlerInterface;
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\Visitor\SerializationVisitorInterface;
 use Pagerfanta\Pagerfanta;
+use Pagerfanta\PagerfantaInterface;
 
 final class PagerfantaHandler implements SubscribingHandlerInterface
 {
-    public static function getSubscribingMethods()
+    public static function getSubscribingMethods(): array
     {
         return [
             [
@@ -19,15 +20,21 @@ final class PagerfantaHandler implements SubscribingHandlerInterface
                 'type' => Pagerfanta::class,
                 'method' => 'serializeToJson',
             ],
+            [
+                'direction' => GraphNavigatorInterface::DIRECTION_SERIALIZATION,
+                'format' => 'json',
+                'type' => PagerfantaInterface::class,
+                'method' => 'serializeToJson',
+            ],
         ];
     }
 
     /**
-     * @param Pagerfanta<mixed> $pagerfanta
+     * @param PagerfantaInterface<mixed> $pagerfanta
      *
      * @return array<string, mixed>|\ArrayObject<string, mixed>
      */
-    public function serializeToJson(SerializationVisitorInterface $visitor, Pagerfanta $pagerfanta, array $type, SerializationContext $context)
+    public function serializeToJson(SerializationVisitorInterface $visitor, PagerfantaInterface $pagerfanta, array $type, SerializationContext $context)
     {
         return $visitor->visitArray(
             [
