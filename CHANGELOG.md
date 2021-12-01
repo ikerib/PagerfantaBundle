@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.6.0 (2021-11-30)
+
+- Support `Pagerfanta\PagerfantaInterface` in the JMS serializer handler
+- Allow v3 of `symfony/deprecation-contracts`
+
 ## 3.5.0 (2021-11-21)
 
 - Deprecate public access to the `pagerfanta.route_generator_factory` and `pagerfanta.view_factory` services
