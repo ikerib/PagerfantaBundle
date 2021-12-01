@@ -18,7 +18,7 @@ final class BabDevPagerfantaBundle extends Bundle
         $container->addCompilerPass(new RegisterTwigUndefinedCallablePass());
     }
 
-    public function getContainerExtension()
+    public function getContainerExtension(): ?BabDevPagerfantaExtension
     {
         if (null === $this->extension) {
             $this->extension = new BabDevPagerfantaExtension();
