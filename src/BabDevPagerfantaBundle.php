@@ -6,6 +6,7 @@ use BabDev\PagerfantaBundle\DependencyInjection\BabDevPagerfantaExtension;
 use BabDev\PagerfantaBundle\DependencyInjection\CompilerPass\RegisterPagerfantaViewsPass;
 use BabDev\PagerfantaBundle\DependencyInjection\CompilerPass\RegisterTwigUndefinedCallablePass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 final class BabDevPagerfantaBundle extends Bundle
@@ -18,7 +19,7 @@ final class BabDevPagerfantaBundle extends Bundle
         $container->addCompilerPass(new RegisterTwigUndefinedCallablePass());
     }
 
-    public function getContainerExtension(): ?BabDevPagerfantaExtension
+    public function getContainerExtension(): ?ExtensionInterface
     {
         if (null === $this->extension) {
             $this->extension = new BabDevPagerfantaExtension();
