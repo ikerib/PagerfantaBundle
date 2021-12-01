@@ -25,11 +25,6 @@ jobs:
             composer-flags: '--prefer-stable --prefer-lowest'
             can-fail: false
             with-twig: true
-          - php: '8.1'
-            symfony: '6.1.*@dev'
-            composer-flags: ''
-            can-fail: true
-            with-twig: true
         exclude:
           - php: '7.4'
             symfony: '6.0.*'
