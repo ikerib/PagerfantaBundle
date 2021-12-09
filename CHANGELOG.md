@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.6.1 (2021-12-08)
+
+- Fix deprecations from Symfony's debug loader
+
 ## 3.6.0 (2021-11-30)
 
 - Support `Pagerfanta\PagerfantaInterface` in the JMS serializer handler
