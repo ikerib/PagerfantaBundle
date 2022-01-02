@@ -7,25 +7,24 @@ use BabDev\PagerfantaBundle\EventListener\ConvertNotValidMaxPerPageToNotFoundLis
 use Pagerfanta\Twig\Extension\PagerfantaExtension;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\HttpKernel\Bundle\BundleInterface;
+use Symfony\Component\HttpKernel\DependencyInjection\ConfigurableExtension;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-final class BabDevPagerfantaExtension extends Extension implements PrependExtensionInterface
+final class BabDevPagerfantaExtension extends ConfigurableExtension implements PrependExtensionInterface
 {
     public function getAlias(): string
     {
         return 'babdev_pagerfanta';
     }
 
-    public function load(array $configs, ContainerBuilder $container): void
+    protected function loadInternal(array $mergedConfig, ContainerBuilder $container): void
     {
-        $config = $this->processConfiguration($this->getConfiguration($configs, $container), $configs);
-        $container->setParameter('babdev_pagerfanta.default_twig_template', $config['default_twig_template']);
-        $container->setParameter('babdev_pagerfanta.default_view', $config['default_view']);
+        $container->setParameter('babdev_pagerfanta.default_twig_template', $mergedConfig['default_twig_template']);
+        $container->setParameter('babdev_pagerfanta.default_view', $mergedConfig['default_view']);
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../../config'));
         $loader->load('pagerfanta.xml');
@@ -51,7 +50,7 @@ final class BabDevPagerfantaExtension extends Extension implements PrependExtens
             $loader->load('serializer.xml');
         }
 
-        if (Configuration::EXCEPTION_STRATEGY_TO_HTTP_NOT_FOUND === $config['exceptions_strategy']['out_of_range_page']) {
+        if (Configuration::EXCEPTION_STRATEGY_TO_HTTP_NOT_FOUND === $mergedConfig['exceptions_strategy']['out_of_range_page']) {
             $container->register('pagerfanta.event_listener.convert_not_valid_max_per_page_to_not_found', ConvertNotValidCurrentPageToNotFoundListener::class)
                 ->addTag(
                     'kernel.event_listener',
@@ -63,7 +62,7 @@ final class BabDevPagerfantaExtension extends Extension implements PrependExtens
                 );
         }
 
-        if (Configuration::EXCEPTION_STRATEGY_TO_HTTP_NOT_FOUND === $config['exceptions_strategy']['not_valid_current_page']) {
+        if (Configuration::EXCEPTION_STRATEGY_TO_HTTP_NOT_FOUND === $mergedConfig['exceptions_strategy']['not_valid_current_page']) {
             $container->register('pagerfanta.event_listener.convert_not_valid_current_page_to_not_found', ConvertNotValidMaxPerPageToNotFoundListener::class)
                 ->addTag(
                     'kernel.event_listener',
