@@ -55,5 +55,10 @@
             "BabDev\\PagerfantaBundle\\Tests\\": "tests/"
         }
     },
+    "config": {
+        "allow-plugins": {
+            "phpstan/extension-installer": true
+        }
+    },
     "minimum-stability": "dev"
 }
