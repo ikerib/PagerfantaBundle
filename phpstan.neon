@@ -1,26 +1,10 @@
+includes:
+  - phpstan-baseline.neon
+
 parameters:
-  level: 8
+  level: max
   paths:
     - %currentWorkingDirectory%/src
     - %currentWorkingDirectory%/tests
-  ignoreErrors:
-    -
-      message: '/Parameter #1 \$configuration of method Symfony\\Component\\DependencyInjection\\Extension\\Extension::processConfiguration\(\) expects Symfony\\Component\\Config\\Definition\\ConfigurationInterface, Symfony\\Component\\Config\\Definition\\ConfigurationInterface\|null given\./'
-      path: %currentWorkingDirectory%/src/DependencyInjection/BabDevPagerfantaExtension.php
-
-    # Tests error handling for untyped argument
-    -
-      message: '/Parameter #2 \$propertyAccessor of class BabDev\\PagerfantaBundle\\RouteGenerator\\RouterAwareRouteGenerator constructor expects array\|Symfony\\Component\\PropertyAccess\\PropertyAccessorInterface\|null, stdClass given\./'
-      path: %currentWorkingDirectory%/tests/RouteGenerator/RouterAwareRouteGeneratorTest.php
-
-    # Ignore unchecked error returns
-    -
-      message: '/Parameter #1 \$path of function dirname expects string, string\|false given\./'
-      path: %currentWorkingDirectory%/tests/View/TwigViewIntegrationTest.php
-
-    -
-      message: '/Method BabDev\\PagerfantaBundle\\Tests\\View\\TwigViewIntegrationTest::removeWhitespacesBetweenTags\(\) should return string but returns string\|null\./'
-      path: %currentWorkingDirectory%/tests/View/TwigViewIntegrationTest.php
-
   checkMissingIterableValueType: false
   treatPhpDocTypesAsCertain: false
