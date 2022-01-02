@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.7.0 (2022-??-??)
+
+- Drop support for Symfony 5.3
+
 ## 3.6.1 (2021-12-08)
 
 - Fix deprecations from Symfony's debug loader

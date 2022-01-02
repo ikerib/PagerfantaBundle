@@ -10,12 +10,13 @@ jobs:
       fail-fast: true
       matrix:
         php: ['7.4', '8.0', '8.1']
-        symfony: ['4.4.*', '5.3.*', '5.4.*', '6.0.*']
+        symfony: ['4.4.*', '5.4.*', '6.0.*']
         composer-flags: ['--prefer-stable']
         can-fail: [false]
         with-twig: [true]
         include:
-          - php: '8.0'
+          # Run "no Twig" build on latest PHP and Symfony LTS
+          - php: '8.1'
             symfony: '5.4.*'
             composer-flags: '--prefer-stable'
             can-fail: false
