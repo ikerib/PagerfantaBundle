@@ -1,8 +1,9 @@
 # Changelog
 
-## 3.7.0 (2022-??-??)
+## 3.7.0 (2022-05-27)
 
 - Drop support for Symfony 5.3
+- Add support for Symfony 6.1
 
 ## 3.6.1 (2021-12-08)
 
