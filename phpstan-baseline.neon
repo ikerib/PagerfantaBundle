@@ -21,11 +21,6 @@ parameters:
 			path: tests/View/TwigViewIntegrationTest.php
 
 		-
-			message: "#^Parameter \\#1 \\$pagerfanta of method Pagerfanta\\\\Twig\\\\View\\\\TwigView\\:\\:render\\(\\) expects Pagerfanta\\\\PagerfantaInterface\\<mixed\\>, Pagerfanta\\\\Pagerfanta\\<int\\> given\\.$#"
-			count: 1
-			path: tests/View/TwigViewIntegrationTest.php
-
-		-
 			message: "#^Parameter \\#1 \\$path of function dirname expects string, string\\|false given\\.$#"
 			count: 1
 			path: tests/View/TwigViewIntegrationTest.php
