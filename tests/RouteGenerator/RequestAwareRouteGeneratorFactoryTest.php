@@ -14,20 +14,11 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 final class RequestAwareRouteGeneratorFactoryTest extends TestCase
 {
-    /**
-     * @var MockObject&UrlGeneratorInterface
-     */
-    private $router;
+    private MockObject&UrlGeneratorInterface $router;
 
-    /**
-     * @var RequestStack
-     */
-    private $requestStack;
+    private RequestStack $requestStack;
 
-    /**
-     * @var MockObject&PropertyAccessorInterface
-     */
-    private $propertyAccessor;
+    private MockObject&PropertyAccessorInterface $propertyAccessor;
 
     protected function setUp(): void
     {
@@ -53,7 +44,7 @@ final class RequestAwareRouteGeneratorFactoryTest extends TestCase
 
         self::assertInstanceOf(
             RouteGeneratorInterface::class,
-            $this->createFactory()->create()
+            $this->createFactory()->create(),
         );
     }
 
@@ -70,7 +61,7 @@ final class RequestAwareRouteGeneratorFactoryTest extends TestCase
 
         self::assertInstanceOf(
             RouteGeneratorInterface::class,
-            $this->createFactory()->create(['routeName' => 'pagerfanta_view'])
+            $this->createFactory()->create(['routeName' => 'pagerfanta_view']),
         );
     }
 

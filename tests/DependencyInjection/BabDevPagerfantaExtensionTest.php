@@ -22,7 +22,7 @@ final class BabDevPagerfantaExtensionTest extends AbstractExtensionTestCase
             'kernel.bundles',
             [
                 'BabDevPagerfantaBundle' => BabDevPagerfantaBundle::class,
-            ]
+            ],
         );
 
         $this->load();
@@ -76,7 +76,7 @@ final class BabDevPagerfantaExtensionTest extends AbstractExtensionTestCase
             [
                 'BabDevPagerfantaBundle' => BabDevPagerfantaBundle::class,
                 'TwigBundle' => TwigBundle::class,
-            ]
+            ],
         );
 
         $this->container->setParameter(
@@ -90,7 +90,7 @@ final class BabDevPagerfantaExtensionTest extends AbstractExtensionTestCase
                     'path' => (__DIR__.'/../../vendor/symfony/twig-bundle'),
                     'namespace' => 'Symfony\\Bundle\\TwigBundle',
                 ],
-            ]
+            ],
         );
 
         $this->container->setParameter('kernel.debug', false);
@@ -117,7 +117,7 @@ final class BabDevPagerfantaExtensionTest extends AbstractExtensionTestCase
                     'event' => KernelEvents::EXCEPTION,
                     'method' => 'onKernelException',
                     'priority' => 512,
-                ]
+                ],
             );
         }
 
@@ -153,7 +153,7 @@ final class BabDevPagerfantaExtensionTest extends AbstractExtensionTestCase
             [
                 'BabDevPagerfantaBundle' => BabDevPagerfantaBundle::class,
                 'JMSSerializerBundle' => JMSSerializerBundle::class,
-            ]
+            ],
         );
 
         $this->load();
@@ -177,7 +177,7 @@ final class BabDevPagerfantaExtensionTest extends AbstractExtensionTestCase
                     'event' => KernelEvents::EXCEPTION,
                     'method' => 'onKernelException',
                     'priority' => 512,
-                ]
+                ],
             );
         }
 
@@ -191,7 +191,7 @@ final class BabDevPagerfantaExtensionTest extends AbstractExtensionTestCase
             'kernel.bundles',
             [
                 'BabDevPagerfantaBundle' => BabDevPagerfantaBundle::class,
-            ]
+            ],
         );
 
         $bundleConfig = [

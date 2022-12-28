@@ -12,13 +12,10 @@ use PHPUnit\Framework\TestCase;
 
 final class PagerfantaHandlerTest extends TestCase
 {
-    /**
-     * @group legacy
-     */
     public function testSerializeToJson(): void
     {
         $pager = new Pagerfanta(
-            new NullAdapter(25)
+            new NullAdapter(25),
         );
 
         $expectedResultArray = [
@@ -45,7 +42,7 @@ final class PagerfantaHandlerTest extends TestCase
 
         self::assertEquals(
             $expectedResultArray,
-            (new PagerfantaHandler())->serializeToJson($visitor, $pager, [], $context)
+            (new PagerfantaHandler())->serializeToJson($visitor, $pager, [], $context),
         );
     }
 }

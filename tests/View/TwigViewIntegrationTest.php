@@ -34,30 +34,15 @@ use Twig\RuntimeLoader\RuntimeLoaderInterface;
  */
 final class TwigViewIntegrationTest extends TestCase
 {
-    /**
-     * @var ViewFactoryInterface
-     */
-    public $viewFactory;
+    public ViewFactoryInterface $viewFactory;
 
-    /**
-     * @var UrlGeneratorInterface
-     */
-    public $router;
+    public UrlGeneratorInterface $router;
 
-    /**
-     * @var RequestStack
-     */
-    public $requestStack;
+    public RequestStack $requestStack;
 
-    /**
-     * @var PropertyAccessorInterface
-     */
-    public $propertyAccessor;
+    public PropertyAccessorInterface $propertyAccessor;
 
-    /**
-     * @var Environment
-     */
-    public $twig;
+    public Environment $twig;
 
     public static function setUpBeforeClass(): void
     {
@@ -76,7 +61,7 @@ final class TwigViewIntegrationTest extends TestCase
         $filesystemLoader->addPath($path, 'Pagerfanta');
 
         $loader = new ChainLoader(
-            [new ArrayLoader(['integration.html.twig' => '{{ pagerfanta(pager, options) }}']), $filesystemLoader]
+            [new ArrayLoader(['integration.html.twig' => '{{ pagerfanta(pager, options) }}']), $filesystemLoader],
         );
         $this->twig = new Environment($loader, ['strict_variables' => true]);
         $this->twig->addExtension(new PagerfantaExtension());
@@ -408,7 +393,7 @@ final class TwigViewIntegrationTest extends TestCase
 
         $this->assertViewOutputMatches(
             $this->twig->render('integration.html.twig', ['pager' => $pagerfanta, 'options' => $options]),
-            $testOutput
+            $testOutput,
         );
     }
 
@@ -423,7 +408,7 @@ final class TwigViewIntegrationTest extends TestCase
         self::assertNotEmpty(
             (new TwigView($this->twig))->render(
                 $this->createPagerfanta(),
-                (new RequestAwareRouteGeneratorFactory($this->router, $this->requestStack, $this->propertyAccessor))->create()
+                (new RequestAwareRouteGeneratorFactory($this->router, $this->requestStack, $this->propertyAccessor))->create(),
             )
         );
     }
@@ -439,22 +424,15 @@ final class TwigViewIntegrationTest extends TestCase
     private function createRuntimeLoader(): RuntimeLoaderInterface
     {
         return new class($this) implements RuntimeLoaderInterface {
-            /**
-             * @var TwigViewIntegrationTest
-             */
-            private $testCase;
-
-            public function __construct(TwigViewIntegrationTest $testCase)
-            {
-                $this->testCase = $testCase;
+            public function __construct(
+                private readonly TwigViewIntegrationTest $testCase,
+            ) {
             }
 
             /**
-             * @param string $class
-             *
-             * @return object|null
+             * @phpstan-param class-string $class
              */
-            public function load($class)
+            public function load(string $class): ?object
             {
                 switch ($class) {
                     case PagerfantaRuntime::class:

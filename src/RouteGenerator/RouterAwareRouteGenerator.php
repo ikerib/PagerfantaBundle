@@ -10,20 +10,15 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 final class RouterAwareRouteGenerator implements RouteGeneratorInterface
 {
-    private UrlGeneratorInterface $router;
-    private PropertyAccessorInterface $propertyAccessor;
-    private array $options;
-
-    public function __construct(UrlGeneratorInterface $router, PropertyAccessorInterface $propertyAccessor, array $options = [])
-    {
+    public function __construct(
+        private readonly UrlGeneratorInterface $router,
+        private readonly PropertyAccessorInterface $propertyAccessor,
+        private readonly array $options = [],
+    ) {
         // Check missing options
         if (!isset($options['routeName'])) {
             throw new InvalidArgumentException(sprintf('The "%s" class options requires a "routeName" parameter to be set.', self::class));
         }
-
-        $this->router = $router;
-        $this->options = $options;
-        $this->propertyAccessor = $propertyAccessor;
     }
 
     public function __invoke(int $page): string

@@ -48,7 +48,7 @@ final class PagerfantaHandler implements SubscribingHandlerInterface
                     'total_pages' => $pagerfanta->getNbPages(),
                 ],
             ],
-            $type
+            $type,
         );
     }
 }

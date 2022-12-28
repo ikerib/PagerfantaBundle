@@ -12,15 +12,11 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 final class RequestAwareRouteGeneratorFactory implements RouteGeneratorFactoryInterface
 {
-    private UrlGeneratorInterface $router;
-    private RequestStack $requestStack;
-    private PropertyAccessorInterface $propertyAccessor;
-
-    public function __construct(UrlGeneratorInterface $router, RequestStack $requestStack, PropertyAccessorInterface $propertyAccessor)
-    {
-        $this->router = $router;
-        $this->requestStack = $requestStack;
-        $this->propertyAccessor = $propertyAccessor;
+    public function __construct(
+        private readonly UrlGeneratorInterface $router,
+        private readonly RequestStack $requestStack,
+        private readonly PropertyAccessorInterface $propertyAccessor
+    ) {
     }
 
     public function create(array $options = []): RouteGeneratorInterface
@@ -57,7 +53,7 @@ final class RequestAwareRouteGeneratorFactory implements RouteGeneratorFactoryIn
         return new RouterAwareRouteGenerator(
             $this->router,
             $this->propertyAccessor,
-            $options
+            $options,
         );
     }
 

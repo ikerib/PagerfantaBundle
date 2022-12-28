@@ -25,7 +25,7 @@ final class ConfigurationTest extends TestCase
 
         self::assertEquals(
             array_merge(self::getBundleDefaultConfig(), $extraConfig),
-            $config
+            $config,
         );
     }
 
@@ -39,7 +39,7 @@ final class ConfigurationTest extends TestCase
 
         self::assertEquals(
             array_merge(self::getBundleDefaultConfig(), $extraConfig),
-            $config
+            $config,
         );
     }
 
@@ -56,7 +56,7 @@ final class ConfigurationTest extends TestCase
 
         self::assertEquals(
             array_merge(self::getBundleDefaultConfig(), $extraConfig),
-            $config
+            $config,
         );
     }
 

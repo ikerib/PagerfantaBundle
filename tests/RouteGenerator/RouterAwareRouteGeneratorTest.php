@@ -33,7 +33,7 @@ final class RouterAwareRouteGeneratorTest extends TestCase
         $generator = new RouterAwareRouteGenerator(
             $this->createRouter(),
             $this->createPropertyAccessor(),
-            ['routeName' => 'pagerfanta_view', 'omitFirstPage' => true]
+            ['routeName' => 'pagerfanta_view', 'omitFirstPage' => true],
         );
 
         self::assertSame('/pagerfanta-view', $generator(1));
@@ -44,7 +44,7 @@ final class RouterAwareRouteGeneratorTest extends TestCase
         $generator = new RouterAwareRouteGenerator(
             $this->createRouter(),
             $this->createPropertyAccessor(),
-            ['routeName' => 'pagerfanta_view', 'pageParameter' => '[custom_page]']
+            ['routeName' => 'pagerfanta_view', 'pageParameter' => '[custom_page]'],
         );
 
         self::assertSame('/pagerfanta-view?custom_page=1', $generator(1));
@@ -55,7 +55,7 @@ final class RouterAwareRouteGeneratorTest extends TestCase
         $generator = new RouterAwareRouteGenerator(
             $this->createRouter(),
             $this->createPropertyAccessor(),
-            ['routeName' => 'pagerfanta_view', 'routeParams' => ['hello' => 'world']]
+            ['routeName' => 'pagerfanta_view', 'routeParams' => ['hello' => 'world']],
         );
 
         self::assertSame('/pagerfanta-view?hello=world&page=1', $generator(1));
@@ -66,7 +66,7 @@ final class RouterAwareRouteGeneratorTest extends TestCase
         $generator = new RouterAwareRouteGenerator(
             $this->createRouter(),
             $this->createPropertyAccessor(),
-            ['routeName' => 'pagerfanta_view', 'referenceType' => UrlGeneratorInterface::ABSOLUTE_URL]
+            ['routeName' => 'pagerfanta_view', 'referenceType' => UrlGeneratorInterface::ABSOLUTE_URL],
         );
 
         self::assertSame('http://localhost/pagerfanta-view?page=1', $generator(1));
@@ -79,7 +79,7 @@ final class RouterAwareRouteGeneratorTest extends TestCase
         $generator = new RouterAwareRouteGenerator(
             $this->createRouter(),
             $this->createPropertyAccessor(),
-            ['routeParams' => ['hello' => 'world']]
+            ['routeParams' => ['hello' => 'world']],
         );
 
         $generator(1);

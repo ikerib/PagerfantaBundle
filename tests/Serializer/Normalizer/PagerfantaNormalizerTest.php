@@ -16,7 +16,7 @@ final class PagerfantaNormalizerTest extends TestCase
     public function testNormalize(): void
     {
         $pager = new Pagerfanta(
-            new NullAdapter(25)
+            new NullAdapter(25),
         );
 
         $expectedResultArray = [
