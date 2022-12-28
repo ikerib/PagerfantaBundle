@@ -53,7 +53,7 @@ final class RequestAwareRouteGeneratorFactoryTest extends TestCase
 
         self::assertInstanceOf(
             RouteGeneratorInterface::class,
-            $this->createFactory(true)->create()
+            $this->createFactory()->create()
         );
     }
 
@@ -70,28 +70,8 @@ final class RequestAwareRouteGeneratorFactoryTest extends TestCase
 
         self::assertInstanceOf(
             RouteGeneratorInterface::class,
-            $this->createFactory(true)->create(['routeName' => 'pagerfanta_view'])
+            $this->createFactory()->create(['routeName' => 'pagerfanta_view'])
         );
-    }
-
-    /**
-     * @group legacy
-     */
-    public function testTheGeneratorIsNotCreatedWhenARouteNameIsNotGivenDuringASubrequest(): void
-    {
-        $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage('The request aware route generator can not guess the route when used in a sub-request, pass the "routeName" option to use this generator.');
-
-        $masterRequest = Request::create('/');
-        $masterRequest->attributes->set('_route', 'pagerfanta_view');
-        $masterRequest->attributes->set('_route_params', []);
-
-        $subRequest = Request::create('/_internal');
-
-        $this->requestStack->push($masterRequest);
-        $this->requestStack->push($subRequest);
-
-        $this->createFactory(false)->create();
     }
 
     public function testTheGeneratorIsNotCreatedWhenARequestIsNotActive(): void
@@ -99,15 +79,15 @@ final class RequestAwareRouteGeneratorFactoryTest extends TestCase
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('The request aware route generator can not be used when there is not an active request.');
 
-        $this->createFactory(true)->create();
+        $this->createFactory()->create();
     }
 
-    private function createFactory(bool $withPropertyAccessor): RequestAwareRouteGeneratorFactory
+    private function createFactory(): RequestAwareRouteGeneratorFactory
     {
         return new RequestAwareRouteGeneratorFactory(
             $this->router,
             $this->requestStack,
-            $withPropertyAccessor ? $this->propertyAccessor : null
+            $this->propertyAccessor
         );
     }
 }

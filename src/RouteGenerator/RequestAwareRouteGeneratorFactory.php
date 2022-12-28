@@ -14,14 +14,10 @@ final class RequestAwareRouteGeneratorFactory implements RouteGeneratorFactoryIn
 {
     private UrlGeneratorInterface $router;
     private RequestStack $requestStack;
-    private ?PropertyAccessorInterface $propertyAccessor;
+    private PropertyAccessorInterface $propertyAccessor;
 
-    public function __construct(UrlGeneratorInterface $router, RequestStack $requestStack, ?PropertyAccessorInterface $propertyAccessor = null)
+    public function __construct(UrlGeneratorInterface $router, RequestStack $requestStack, PropertyAccessorInterface $propertyAccessor)
     {
-        if (null === $propertyAccessor) {
-            trigger_deprecation('babdev/pagerfanta-bundle', '3.1', 'Not passing a "%s" to the "%s" constructor is deprecated. As of 4.0, it will be a required argument.', PropertyAccessorInterface::class, self::class);
-        }
-
         $this->router = $router;
         $this->requestStack = $requestStack;
         $this->propertyAccessor = $propertyAccessor;
@@ -60,8 +56,8 @@ final class RequestAwareRouteGeneratorFactory implements RouteGeneratorFactoryIn
 
         return new RouterAwareRouteGenerator(
             $this->router,
-            null === $this->propertyAccessor ? $options : $this->propertyAccessor,
-            null === $this->propertyAccessor ? [] : $options
+            $this->propertyAccessor,
+            $options
         );
     }
 

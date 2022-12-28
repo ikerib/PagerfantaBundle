@@ -28,27 +28,6 @@ final class RouterAwareRouteGeneratorTest extends TestCase
         return PropertyAccess::createPropertyAccessor();
     }
 
-    public function testTheConstructorRejectsInvalidTypesForThePropertyAccessorArgument(): void
-    {
-        $this->expectException(InvalidArgumentException::class);
-
-        new RouterAwareRouteGenerator(
-            $this->createRouter(),
-            new \stdClass(),
-            ['routeParams' => ['hello' => 'world']]
-        );
-    }
-
-    /**
-     * @group legacy
-     */
-    public function testARouteIsGeneratedWithEmptyOptions(): void
-    {
-        $generator = new RouterAwareRouteGenerator($this->createRouter(), ['routeName' => 'pagerfanta_view']);
-
-        self::assertSame('/pagerfanta-view?page=1', $generator(1));
-    }
-
     public function testARouteIsGeneratedWithFirstPageOmitted(): void
     {
         $generator = new RouterAwareRouteGenerator(
@@ -60,13 +39,11 @@ final class RouterAwareRouteGeneratorTest extends TestCase
         self::assertSame('/pagerfanta-view', $generator(1));
     }
 
-    /**
-     * @group legacy
-     */
     public function testARouteIsGeneratedWithACustomPageParameter(): void
     {
         $generator = new RouterAwareRouteGenerator(
             $this->createRouter(),
+            $this->createPropertyAccessor(),
             ['routeName' => 'pagerfanta_view', 'pageParameter' => '[custom_page]']
         );
 
@@ -84,13 +61,11 @@ final class RouterAwareRouteGeneratorTest extends TestCase
         self::assertSame('/pagerfanta-view?hello=world&page=1', $generator(1));
     }
 
-    /**
-     * @group legacy
-     */
     public function testARouteIsGeneratedWithAnAbsoluteUrl(): void
     {
         $generator = new RouterAwareRouteGenerator(
             $this->createRouter(),
+            $this->createPropertyAccessor(),
             ['routeName' => 'pagerfanta_view', 'referenceType' => UrlGeneratorInterface::ABSOLUTE_URL]
         );
 
