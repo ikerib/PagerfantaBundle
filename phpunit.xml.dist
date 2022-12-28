@@ -20,4 +20,9 @@
     <listeners>
         <listener class="Symfony\Bridge\PhpUnit\SymfonyTestsListener"/>
     </listeners>
+
+    <php>
+        <!-- Ignore deprecations from lowest stable dependencies -->
+        <env name="SYMFONY_DEPRECATIONS_HELPER" value="max[indirect]=1"/>
+    </php>
 </phpunit>
