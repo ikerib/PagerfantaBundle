@@ -9,28 +9,23 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        php: ['7.4', '8.0', '8.1', '8.2']
+        php: ['8.1', '8.2']
         symfony: ['5.4.*', '6.2.*']
         composer-flags: ['--prefer-stable']
         can-fail: [false]
         with-twig: [true]
         include:
           # Run "no Twig" build on latest PHP and Symfony LTS
-          - php: '8.1'
+          - php: '8.2'
             symfony: '5.4.*'
             composer-flags: '--prefer-stable'
             can-fail: false
             with-twig: false
-          - php: '7.4'
+          - php: '8.1'
             symfony: '5.4.*'
             composer-flags: '--prefer-stable --prefer-lowest'
             can-fail: false
             with-twig: true
-        exclude:
-          - php: '7.4'
-            symfony: '6.2.*'
-          - php: '8.0'
-            symfony: '6.2.*'
 
     name: "PHP ${{ matrix.php }}${{ matrix.with-twig == false && ' - Without Twig' || '' }} - Symfony ${{ matrix.symfony }}${{ matrix.composer-flags != '' && format(' - Composer {0}', matrix.composer-flags) || '' }}"
 
