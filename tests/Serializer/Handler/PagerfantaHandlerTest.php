@@ -3,46 +3,32 @@
 namespace BabDev\PagerfantaBundle\Tests\Serializer\Handler;
 
 use BabDev\PagerfantaBundle\Serializer\Handler\PagerfantaHandler;
-use JMS\Serializer\SerializationContext;
-use JMS\Serializer\Visitor\SerializationVisitorInterface;
-use Pagerfanta\Adapter\NullAdapter;
+use JMS\Serializer\EventDispatcher\EventDispatcher;
+use JMS\Serializer\Handler\HandlerRegistry;
+use JMS\Serializer\SerializerBuilder;
+use JMS\Serializer\SerializerInterface;
+use Pagerfanta\Adapter\FixedAdapter;
 use Pagerfanta\Pagerfanta;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 final class PagerfantaHandlerTest extends TestCase
 {
     public function testSerializeToJson(): void
     {
-        $pager = new Pagerfanta(
-            new NullAdapter(25),
+        $pager = new Pagerfanta(new FixedAdapter(100, range(1, 5)));
+        $pager->setMaxPerPage(5);
+
+        self::assertJsonStringEqualsJsonString(
+            '{"items":[1,2,3,4,5],"pagination":{"current_page":1,"has_previous_page":false,"has_next_page":true,"per_page":5,"total_items":100,"total_pages":20}}',
+            $this->createSerializer()->serialize($pager, 'json'),
         );
+    }
 
-        $expectedResultArray = [
-            'items' => $pager->getCurrentPageResults(),
-            'pagination' => [
-                'current_page' => $pager->getCurrentPage(),
-                'has_previous_page' => $pager->hasPreviousPage(),
-                'has_next_page' => $pager->hasNextPage(),
-                'per_page' => $pager->getMaxPerPage(),
-                'total_items' => $pager->getNbResults(),
-                'total_pages' => $pager->getNbPages(),
-            ],
-        ];
+    private function createSerializer(): SerializerInterface
+    {
+        $registry = new HandlerRegistry();
+        $registry->registerSubscribingHandler(new PagerfantaHandler());
 
-        /** @var SerializationContext&MockObject $context */
-        $context = $this->createMock(SerializationContext::class);
-
-        /** @var SerializationVisitorInterface&MockObject $visitor */
-        $visitor = $this->createMock(SerializationVisitorInterface::class);
-        $visitor->expects(self::once())
-            ->method('visitArray')
-            ->with(self::isType('array'), [])
-            ->willReturn($expectedResultArray);
-
-        self::assertEquals(
-            $expectedResultArray,
-            (new PagerfantaHandler())->serializeToJson($visitor, $pager, [], $context),
-        );
+        return SerializerBuilder::create($registry, new EventDispatcher())->build();
     }
 }
