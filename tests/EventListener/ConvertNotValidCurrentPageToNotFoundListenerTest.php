@@ -19,7 +19,7 @@ final class ConvertNotValidCurrentPageToNotFoundListenerTest extends TestCase
         $event = new ExceptionEvent(
             $this->createMock(HttpKernelInterface::class),
             $this->createMock(Request::class),
-            defined(HttpKernelInterface::class.'::MAIN_REQUEST') ? HttpKernelInterface::MAIN_REQUEST : HttpKernelInterface::MASTER_REQUEST,
+            HttpKernelInterface::MAIN_REQUEST,
             $exception
         );
 
@@ -36,7 +36,7 @@ final class ConvertNotValidCurrentPageToNotFoundListenerTest extends TestCase
         $event = new ExceptionEvent(
             $this->createMock(HttpKernelInterface::class),
             $this->createMock(Request::class),
-            defined(HttpKernelInterface::class.'::MAIN_REQUEST') ? HttpKernelInterface::MAIN_REQUEST : HttpKernelInterface::MASTER_REQUEST,
+            HttpKernelInterface::MAIN_REQUEST,
             $exception
         );
 
