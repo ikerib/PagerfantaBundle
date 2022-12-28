@@ -34,7 +34,12 @@
     },
     "conflict": {
         "jms/serializer": "<3.14",
+        "jms/serializer-bundle": "<3.0",
         "pagerfanta/twig": "<3.1",
+        "symfony/serializer": "<5.4",
+        "symfony/translation": "<5.4",
+        "symfony/twig-bridge": "<5.4",
+        "symfony/twig-bundle": "<5.4",
         "twig/twig": "<2.13",
         "white-october/pagerfanta-bundle": "*"
     },
