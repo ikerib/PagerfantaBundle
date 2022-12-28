@@ -7,7 +7,7 @@ First, you'll need to pass an instance of Pagerfanta as a parameter into your te
 
 namespace App\Controller;
 
-use App\Entity\BlogPost;
+use App\Entity\BlogPostRepository;
 use Pagerfanta\Doctrine\ORM\QueryAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,22 +16,20 @@ use Symfony\Component\Routing\Annotation\Route;
 
 final class BlogController extends AbstractController
 {
-    /**
-     * @Route("/blog", name="app_blog_list", methods={"GET"})
-     */
-    public function listPosts(): Response
+    #[Route(path: '/blog', name: 'app_blog_list', methods: ['GET'])]
+    public function listPosts(BlogPostRepository $blogPostRepository): Response
     {
-        $queryBuilder = $this->get('doctrine')->getRepository(BlogPost::class)->createBlogListQueryBuilder();
+        $queryBuilder = $blogPostRepository->createBlogListQueryBuilder();
 
         $pagerfanta = new Pagerfanta(
-            new QueryAdapter($queryBuilder)
+            new QueryAdapter($queryBuilder),
         );
 
         return $this->render(
             'blog/list.html.twig',
             [
                 'pager' => $pagerfanta,
-            ]
+            ],
         );
     }
 }

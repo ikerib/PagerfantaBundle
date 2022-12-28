@@ -12,7 +12,6 @@ services:
         arguments:
             - @pagerfanta.view.default
             - { proximity: 2, prev_message: Anterior, next_message: Siguiente }
-        public: false
         tags:
             - { name: pagerfanta.view, alias: low_proximity_and_spanish_messages }
 
@@ -22,7 +21,6 @@ services:
         arguments:
             - @pagerfanta.view.default
             - { proximity: 5 }
-        public: false
         tags:
             - { name: pagerfanta.view, alias: high_proximity }
 ```

@@ -9,7 +9,7 @@ Below is an example of building a JSON response in a controller using the Symfon
 
 namespace App\Controller\API;
 
-use App\Entity\BlogPost;
+use App\Entity\BlogPostRepository;
 use Pagerfanta\Doctrine\ORM\QueryAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,12 +18,10 @@ use Symfony\Component\Routing\Annotation\Route;
 
 final class PostController extends AbstractController
 {
-    /**
-     * @Route("/api/posts", name="app_api_post_list", methods={"GET"})
-     */
-    public function apiPostList(): JsonResponse
+    #[Route(path: '/api/posts', name: 'app_api_post_list', methods: ['GET'])]
+    public function apiPostList(BlogPostRepository $blogPostRepository): JsonResponse
     {
-        $queryBuilder = $this->get('doctrine')->getRepository(BlogPost::class)->createBlogListQueryBuilder();
+        $queryBuilder = $blogPostRepository->createBlogListQueryBuilder();
 
         $pagerfanta = new Pagerfanta(
             new QueryAdapter($queryBuilder)

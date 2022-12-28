@@ -37,7 +37,7 @@ The labels of the "Previous" and "Next" buttons are localizable in the Twig temp
 
 ### Creating a Twig View Template
 
-If creating a custom template, you are encouraged to extend the `@BabDevPagerfanta/default.html.twig` template (found at `Resources/views/default.html.twig`) and override only the blocks needed.
+If creating a custom template, you are encouraged to extend the `@BabDevPagerfanta/default.html.twig` template (found at `templates/default.html.twig`) and override only the blocks needed.
 
 Generally, the `pager_widget` block should only be extended if you need to change the wrapping HTML for the paginator. The `pager` block should still be rendered from your extended block.
 
