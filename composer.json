@@ -16,7 +16,7 @@
     },
     "require-dev": {
         "doctrine/annotations": "^1.8",
-        "jms/serializer": "^3.0",
+        "jms/serializer": "^3.14",
         "jms/serializer-bundle": "^3.0 || ^4.0",
         "matthiasnoback/symfony-dependency-injection-test": "^4.3",
         "pagerfanta/twig": "^3.1",
@@ -33,6 +33,7 @@
         "twig/twig": "^2.13 || ^3.0"
     },
     "conflict": {
+        "jms/serializer": "<3.14",
         "pagerfanta/twig": "<3.1",
         "twig/twig": "<2.13",
         "white-october/pagerfanta-bundle": "*"
