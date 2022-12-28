@@ -21,7 +21,7 @@ final class Configuration implements ConfigurationInterface
         $root
             ->children()
                 ->scalarNode('default_view')->defaultValue('default')->end()
-                ->scalarNode('default_twig_template')->defaultValue('@Pagerfanta/default.html.twig')->end()
+                ->scalarNode('default_twig_template')->defaultValue('@BabDevPagerfanta/default.html.twig')->end()
                 ->arrayNode('exceptions_strategy')
                     ->addDefaultsIfNotSet()
                     ->children()

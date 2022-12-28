@@ -64,7 +64,7 @@ final class ConfigurationTest extends TestCase
     {
         return [
             'default_view' => 'default',
-            'default_twig_template' => '@Pagerfanta/default.html.twig',
+            'default_twig_template' => '@BabDevPagerfanta/default.html.twig',
             'exceptions_strategy' => [
                 'out_of_range_page' => Configuration::EXCEPTION_STRATEGY_TO_HTTP_NOT_FOUND,
                 'not_valid_current_page' => Configuration::EXCEPTION_STRATEGY_TO_HTTP_NOT_FOUND,

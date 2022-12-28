@@ -11,5 +11,6 @@ The below guide will assist in upgrading from the 3.x versions to 4.0.
 ## General Changes
 
 - A `Symfony\Component\PropertyAccess\PropertyAccessorInterface` is now required in `BabDev\PagerfantaBundle\RouteGenerator\RequestAwareRouteGeneratorFactory` and `BabDev\PagerfantaBundle\RouteGenerator\RouterAwareRouteGenerator`
+- The default Twig template is now `@BabDevPagerfanta/default.html.twig`
 
 ## Removed Features
