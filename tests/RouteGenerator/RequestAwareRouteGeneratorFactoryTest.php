@@ -65,6 +65,23 @@ final class RequestAwareRouteGeneratorFactoryTest extends TestCase
         );
     }
 
+    public function testTheGeneratorIsNotCreatedWhenARouteNameIsNotGivenDuringASubrequest(): void
+    {
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('The request aware route generator can not guess the route when used in a sub-request, pass the "routeName" option to use this generator.');
+
+        $masterRequest = Request::create('/');
+        $masterRequest->attributes->set('_route', 'pagerfanta_view');
+        $masterRequest->attributes->set('_route_params', []);
+
+        $subRequest = Request::create('/_internal');
+
+        $this->requestStack->push($masterRequest);
+        $this->requestStack->push($subRequest);
+
+        $this->createFactory()->create();
+    }
+
     public function testTheGeneratorIsNotCreatedWhenARequestIsNotActive(): void
     {
         $this->expectException(RuntimeException::class);
