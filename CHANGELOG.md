@@ -1,54 +1,5 @@
 # Changelog
 
-## 3.7.0 (2022-05-27)
+## 4.0.0 (????-??-??)
 
-- Drop support for Symfony 5.3
-- Add support for Symfony 6.1
-
-## 3.6.1 (2021-12-08)
-
-- Fix deprecations from Symfony's debug loader
-
-## 3.6.0 (2021-11-30)
-
-- Support `Pagerfanta\PagerfantaInterface` in the JMS serializer handler
-- Allow v3 of `symfony/deprecation-contracts`
-
-## 3.5.0 (2021-11-21)
-
-- Deprecate public access to the `pagerfanta.route_generator_factory` and `pagerfanta.view_factory` services
-- Give a better error message if trying to use Twig functions when `pagerfanta/twig` is not installed
-
-## 3.4.0 (2021-11-09)
-
-- Add support for Symfony 6
-
-## 3.3.0 (2021-08-01)
-
-- Drop support for Symfony 5.2, it is no longer maintained
-- Throw exception in the route generator factory if there is not an active request
-
-## 3.2.1 (2021-06-09)
-
-- [#36](https://github.com/BabDev/PagerfantaBundle/pull/36) Items not correctly serialized when using `symfony/serializer` (Fixes [#35](https://github.com/BabDev/PagerfantaBundle/issues/35))
-
-## 3.2.0 (2021-05-11)
-
-- Add support for the Foundation 6 templates added to the `pagerfanta/core` and `pagerfanta/twig` packages
-
-## 3.1.0 (2021-04-25)
-
-- Inject the `property_accessor` service into the route generator factory and route generator when available
-- Deprecate not passing a property accessor into the route generator factory and route generator
-
-## 3.0.2 (2021-03-31)
-
-- Fix more errors caused by optional Twig dependency not being installed
-
-## 3.0.1 (2021-03-08)
-
-- Fix errors caused by optional Twig dependency not being installed
-
-## 3.0.0 (2021-03-07)
-
-- Consult the UPGRADE guide for changes between 2.x and 3.0
+- Consult the UPGRADE guide for changes between 3.x and 4.0
