@@ -2,6 +2,8 @@
 
 namespace BabDev\PagerfantaBundle\DependencyInjection\CompilerPass;
 
+use BabDev\PagerfantaBundle\View\ContainerBackedImmutableViewFactory;
+use Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
@@ -18,6 +20,26 @@ final class RegisterPagerfantaViewsPass implements CompilerPassInterface
         }
 
         $definition = $container->getDefinition('pagerfanta.view_factory');
+
+        if (ContainerBackedImmutableViewFactory::class === $definition->getClass()) {
+            /** @var array<string, Reference> $locator */
+            $locator = [];
+
+            /** @var array<string, string> $serviceMap */
+            $serviceMap = [];
+
+            foreach ($container->findTaggedServiceIds('pagerfanta.view') as $serviceId => $arguments) {
+                $alias = $arguments[0]['alias'] ?? $serviceId;
+
+                $locator[$alias] = new Reference($serviceId);
+                $serviceMap[$alias] = $serviceId;
+            }
+
+            $definition->replaceArgument(0, new ServiceLocatorArgument($locator));
+            $definition->replaceArgument(1, $serviceMap);
+
+            return;
+        }
 
         foreach ($container->findTaggedServiceIds('pagerfanta.view') as $serviceId => $arguments) {
             $alias = $arguments[0]['alias'] ?? $serviceId;

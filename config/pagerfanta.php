@@ -3,6 +3,7 @@
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
 use BabDev\PagerfantaBundle\RouteGenerator\RequestAwareRouteGeneratorFactory;
+use BabDev\PagerfantaBundle\View\ContainerBackedImmutableViewFactory;
 use Pagerfanta\RouteGenerator\RouteGeneratorFactoryInterface;
 use Pagerfanta\View\DefaultView;
 use Pagerfanta\View\Foundation6View;
@@ -11,7 +12,6 @@ use Pagerfanta\View\TwitterBootstrap3View;
 use Pagerfanta\View\TwitterBootstrap4View;
 use Pagerfanta\View\TwitterBootstrap5View;
 use Pagerfanta\View\TwitterBootstrapView;
-use Pagerfanta\View\ViewFactory;
 use Pagerfanta\View\ViewFactoryInterface;
 
 return static function (ContainerConfigurator $container): void {
@@ -54,6 +54,11 @@ return static function (ContainerConfigurator $container): void {
         ->tag('pagerfanta.view', ['alias' => 'twitter_bootstrap5'])
     ;
 
-    $services->set('pagerfanta.view_factory', ViewFactory::class);
+    $services->set('pagerfanta.view_factory', ContainerBackedImmutableViewFactory::class)
+        ->args([
+            abstract_arg('service locator'),
+            abstract_arg('service map'),
+        ])
+    ;
     $services->alias(ViewFactoryInterface::class, 'pagerfanta.view_factory');
 };
