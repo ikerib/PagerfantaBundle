@@ -4,6 +4,7 @@ includes:
 parameters:
   level: max
   paths:
+    - %currentWorkingDirectory%/config
     - %currentWorkingDirectory%/src
     - %currentWorkingDirectory%/tests
   checkMissingIterableValueType: false

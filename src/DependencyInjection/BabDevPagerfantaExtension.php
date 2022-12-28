@@ -8,7 +8,7 @@ use Pagerfanta\Twig\Extension\PagerfantaExtension;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 use Symfony\Component\HttpKernel\DependencyInjection\ConfigurableExtension;
 use Symfony\Component\HttpKernel\KernelEvents;
@@ -23,19 +23,22 @@ final class BabDevPagerfantaExtension extends ConfigurableExtension implements P
 
     protected function loadInternal(array $mergedConfig, ContainerBuilder $container): void
     {
-        $container->setParameter('babdev_pagerfanta.default_twig_template', $mergedConfig['default_twig_template']);
-        $container->setParameter('babdev_pagerfanta.default_view', $mergedConfig['default_view']);
-
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../../config'));
-        $loader->load('pagerfanta.xml');
+        $loader = new PhpFileLoader($container, new FileLocator(__DIR__.'/../../config'));
+        $loader->load('pagerfanta.php');
 
         /** @var array<string, class-string<BundleInterface>> $bundles */
         $bundles = $container->getParameter('kernel.bundles');
 
         if (isset($bundles['TwigBundle'])) {
-            $loader->load('twig.xml');
+            $loader->load('twig.php');
 
-            if (!class_exists(PagerfantaExtension::class)) {
+            if (ContainerBuilder::willBeAvailable('pagerfanta/twig', PagerfantaExtension::class, ['babdev/pagerfanta-bundle'])) {
+                $container->getDefinition('pagerfanta.twig_runtime')
+                    ->replaceArgument(0, $mergedConfig['default_view']);
+
+                $container->getDefinition('pagerfanta.view.twig')
+                    ->replaceArgument(1, $mergedConfig['default_twig_template']);
+            } else {
                 $container->removeDefinition('pagerfanta.twig_extension');
                 $container->removeDefinition('pagerfanta.twig_runtime');
                 $container->removeDefinition('pagerfanta.view.twig');
@@ -43,11 +46,11 @@ final class BabDevPagerfantaExtension extends ConfigurableExtension implements P
         }
 
         if (isset($bundles['JMSSerializerBundle'])) {
-            $loader->load('jms_serializer.xml');
+            $loader->load('jms_serializer.php');
         }
 
         if (interface_exists(NormalizerInterface::class)) {
-            $loader->load('serializer.xml');
+            $loader->load('serializer.php');
         }
 
         if (Configuration::EXCEPTION_STRATEGY_TO_HTTP_NOT_FOUND === $mergedConfig['exceptions_strategy']['out_of_range_page']) {
