@@ -9,7 +9,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        php: ['7.4', '8.0', '8.1']
+        php: ['7.4', '8.0', '8.1', '8.2']
         symfony: ['4.4.*', '5.4.*', '6.0.*', '6.1.*', '6.2.*']
         composer-flags: ['--prefer-stable']
         can-fail: [false]
@@ -37,6 +37,8 @@ jobs:
             symfony: '6.1.*'
           - php: '8.0'
             symfony: '6.2.*'
+          - php: '8.2'
+            symfony: '4.4.*'
 
     name: "PHP ${{ matrix.php }}${{ matrix.with-twig == false && ' - Without Twig' || '' }} - Symfony ${{ matrix.symfony }}${{ matrix.composer-flags != '' && format(' - Composer {0}', matrix.composer-flags) || '' }}"
 
