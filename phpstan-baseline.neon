@@ -11,11 +11,6 @@ parameters:
 			path: tests/DependencyInjection/BabDevPagerfantaExtensionTest.php
 
 		-
-			message: "#^Parameter \\#2 \\$propertyAccessor of class BabDev\\\\PagerfantaBundle\\\\RouteGenerator\\\\RouterAwareRouteGenerator constructor expects array\\|Symfony\\\\Component\\\\PropertyAccess\\\\PropertyAccessorInterface\\|null, stdClass given\\.$#"
-			count: 1
-			path: tests/RouteGenerator/RouterAwareRouteGeneratorTest.php
-
-		-
 			message: "#^Method BabDev\\\\PagerfantaBundle\\\\Tests\\\\View\\\\TwigViewIntegrationTest\\:\\:removeWhitespacesBetweenTags\\(\\) should return string but returns string\\|null\\.$#"
 			count: 1
 			path: tests/View/TwigViewIntegrationTest.php
