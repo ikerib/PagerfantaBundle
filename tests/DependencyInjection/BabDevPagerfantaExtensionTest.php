@@ -64,9 +64,6 @@ final class BabDevPagerfantaExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasService('pagerfanta.serializer.normalizer');
     }
 
-    /**
-     * @group legacy
-     */
     public function testContainerIsLoadedWithDefaultConfigurationWhenTwigBundleIsInstalled(): void
     {
         if (!class_exists(PagerfantaExtension::class)) {
@@ -99,10 +96,6 @@ final class BabDevPagerfantaExtensionTest extends AbstractExtensionTestCase
 
         $this->container->setParameter('kernel.debug', false);
         $this->container->setParameter('kernel.project_dir', __DIR__);
-
-        if (method_exists(Kernel::class, 'getRootDir')) {
-            $this->container->setParameter('kernel.root_dir', __DIR__);
-        }
 
         $this->load();
 
