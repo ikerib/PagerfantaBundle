@@ -57,8 +57,8 @@ jobs:
       - name: Restrict Pagerfanta version
         if: ${{ matrix.pagerfanta }}
         run: |
-          composer require --no-update pagerfanta/core:${{ matrix.pagerfanta }})
-          composer require --dev --no-update pagerfanta/twig:${{ matrix.pagerfanta }})
+          composer require --no-update pagerfanta/core:${{ matrix.pagerfanta }}
+          composer require --dev --no-update pagerfanta/twig:${{ matrix.pagerfanta }}
 
       - name: Remove Twig
         if: matrix.with-twig == false
