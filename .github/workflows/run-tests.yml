@@ -11,6 +11,7 @@ jobs:
       matrix:
         php: ['8.1', '8.2']
         symfony: ['5.4.*', '6.2.*']
+        pagerfanta: ['']
         composer-flags: ['--prefer-stable']
         can-fail: [false]
         with-twig: [true]
@@ -26,8 +27,14 @@ jobs:
             composer-flags: '--prefer-stable --prefer-lowest'
             can-fail: false
             with-twig: true
+          - php: '8.2'
+            symfony: '6.2.*'
+            pagerfanta: '^4.0@dev'
+            composer-flags: '--prefer-stable'
+            can-fail: false
+            with-twig: true
 
-    name: "PHP ${{ matrix.php }}${{ matrix.with-twig == false && ' - Without Twig' || '' }} - Symfony ${{ matrix.symfony }}${{ matrix.composer-flags != '' && format(' - Composer {0}', matrix.composer-flags) || '' }}"
+    name: "PHP ${{ matrix.php }}${{ matrix.pagerfanta != '' && format(' - Pagerfanta {0}', matrix.pagerfanta) || '' }}${{ matrix.with-twig == false && ' - Without Twig' || '' }} - Symfony ${{ matrix.symfony }}${{ matrix.composer-flags != '' && format(' - Composer {0}', matrix.composer-flags) || '' }}"
 
     steps:
       - name: Checkout code
@@ -47,14 +54,18 @@ jobs:
           extensions: curl, iconv, mbstring, pdo, pdo_sqlite, sqlite, zip
           coverage: none
 
+      - name: Restrict Pagerfanta version
+        if: ${{ matrix.pagerfanta }}
+        run: |
+          composer require --no-update pagerfanta/core:${{ matrix.pagerfanta }})
+          composer require --dev --no-update pagerfanta/twig:${{ matrix.pagerfanta }})
+
       - name: Remove Twig
         if: matrix.with-twig == false
-        run: |
-          composer remove --dev --no-update pagerfanta/twig symfony/twig-bridge symfony/twig-bundle twig/twig
+        run: composer remove --dev --no-update pagerfanta/twig symfony/twig-bridge symfony/twig-bundle twig/twig
 
       - name: Install dependencies
-        run: |
-          composer update ${{ matrix.composer-flags }} --prefer-dist
+        run: composer update ${{ matrix.composer-flags }} --prefer-dist
         env:
           SYMFONY_REQUIRE: ${{ matrix.symfony }}
 
