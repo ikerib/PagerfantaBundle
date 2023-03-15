@@ -431,6 +431,7 @@ final class TwigViewIntegrationTest extends TestCase
 
             /**
              * @param string $class
+             *
              * @phpstan-param class-string $class
              *
              * @return object|null
