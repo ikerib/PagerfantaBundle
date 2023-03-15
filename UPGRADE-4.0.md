@@ -6,7 +6,7 @@ The below guide will assist in upgrading from the 3.x versions to 4.0.
 
 - Symfony 5.4 or 6.2+
 - PHP 8.1 or later
-- Pagerfanta 3.0 or later
+- Pagerfanta 3.7 or later
 
 ## General Changes
 
