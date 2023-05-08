@@ -28,8 +28,7 @@ jobs:
             can-fail: false
             with-twig: true
           - php: '8.2'
-            symfony: '6.2.*'
-            pagerfanta: '^4.0@dev'
+            symfony: '6.3.*@beta'
             composer-flags: '--prefer-stable'
             can-fail: false
             with-twig: true
