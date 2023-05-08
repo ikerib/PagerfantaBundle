@@ -2,6 +2,7 @@
 
 namespace BabDev\PagerfantaBundle\Serializer\Normalizer;
 
+use Pagerfanta\Pagerfanta;
 use Pagerfanta\PagerfantaInterface;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\CacheableSupportsMethodInterface;
@@ -38,6 +39,17 @@ final class PagerfantaNormalizer implements NormalizerInterface, CacheableSuppor
     public function supportsNormalization(mixed $data, string $format = null, array $context = []): bool
     {
         return $data instanceof PagerfantaInterface;
+    }
+
+    /**
+     * @return array<class-string, true>
+     */
+    public function getSupportedTypes(?string $format): array
+    {
+        return [
+            PagerfantaInterface::class => true,
+            Pagerfanta::class => true,
+        ];
     }
 
     public function hasCacheableSupportsMethod(): bool

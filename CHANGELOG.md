@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.1.0 (????-??-??)
+
+- Add support for `Symfony\Component\Serializer\Normalizer\NormalizerInterface::getSupportedTypes()` for Symfony 6.3+
+
 ## 4.0.0 (2023-03-15)
 
 - Consult the UPGRADE guide for changes between 3.x and 4.0

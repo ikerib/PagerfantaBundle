@@ -3,7 +3,7 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         colors="true"
         bootstrap="vendor/autoload.php"
-        xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.5/phpunit.xsd"
+        xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
 >
     <testsuites>
         <testsuite name="BabDevPagerfantaBundle Test Suite">
@@ -22,7 +22,7 @@
     </listeners>
 
     <php>
-        <!-- Ignore deprecations from lowest stable dependencies -->
-        <env name="SYMFONY_DEPRECATIONS_HELPER" value="max[indirect]=10&amp;max[direct]=18"/>
+        <!-- Ignore deprecations from lowest stable and symfony/serializer:^6.3 -->
+        <env name="SYMFONY_DEPRECATIONS_HELPER" value="max[indirect]=1&amp;max[indirect]=10&amp;max[direct]=18"/>
     </php>
 </phpunit>
