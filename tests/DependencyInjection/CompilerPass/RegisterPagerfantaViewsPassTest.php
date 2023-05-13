@@ -8,7 +8,6 @@ use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractCompilerPassTestCase
 use Pagerfanta\View\DefaultView;
 use Pagerfanta\View\ViewFactory;
 use Symfony\Component\DependencyInjection\Argument\AbstractArgument;
-use Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
@@ -44,7 +43,7 @@ final class RegisterPagerfantaViewsPassTest extends AbstractCompilerPassTestCase
         $this->assertContainerBuilderHasServiceDefinitionWithArgument(
             'pagerfanta.view_factory',
             0,
-            new ServiceLocatorArgument(['default' => new Reference('pagerfanta.view.default')]),
+            new Reference('.service_locator.3Jj7I65'),
         );
         $this->assertContainerBuilderHasServiceDefinitionWithArgument(
             'pagerfanta.view_factory',

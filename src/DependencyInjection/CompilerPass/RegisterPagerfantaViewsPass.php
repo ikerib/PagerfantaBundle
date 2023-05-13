@@ -3,8 +3,8 @@
 namespace BabDev\PagerfantaBundle\DependencyInjection\CompilerPass;
 
 use BabDev\PagerfantaBundle\View\ContainerBackedImmutableViewFactory;
-use Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use Symfony\Component\DependencyInjection\Compiler\ServiceLocatorTagPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
@@ -35,7 +35,7 @@ final class RegisterPagerfantaViewsPass implements CompilerPassInterface
                 $serviceMap[$alias] = $serviceId;
             }
 
-            $definition->replaceArgument(0, new ServiceLocatorArgument($locator));
+            $definition->replaceArgument(0, ServiceLocatorTagPass::register($container, $locator));
             $definition->replaceArgument(1, $serviceMap);
 
             return;
