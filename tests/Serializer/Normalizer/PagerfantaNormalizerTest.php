@@ -2,6 +2,7 @@
 
 namespace BabDev\PagerfantaBundle\Tests\Serializer\Normalizer;
 
+use BabDev\PagerfantaBundle\Serializer\Normalizer\LegacyPagerfantaNormalizer;
 use BabDev\PagerfantaBundle\Serializer\Normalizer\PagerfantaNormalizer;
 use Pagerfanta\Adapter\FixedAdapter;
 use Pagerfanta\Adapter\NullAdapter;
@@ -60,7 +61,7 @@ final class PagerfantaNormalizerTest extends TestCase
 
     public function testHasCacheableSupportsMethod(): void
     {
-        self::assertTrue((new PagerfantaNormalizer())->hasCacheableSupportsMethod());
+        self::assertTrue((new LegacyPagerfantaNormalizer(new PagerfantaNormalizer()))->hasCacheableSupportsMethod());
     }
 
     public function testItSerializesIterableData(): void
