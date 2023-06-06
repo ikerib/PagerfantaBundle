@@ -5,12 +5,16 @@ namespace BabDev\PagerfantaBundle\Tests\DependencyInjection;
 use BabDev\PagerfantaBundle\BabDevPagerfantaBundle;
 use BabDev\PagerfantaBundle\DependencyInjection\BabDevPagerfantaExtension;
 use BabDev\PagerfantaBundle\DependencyInjection\Configuration;
+use BabDev\PagerfantaBundle\Serializer\Normalizer\LegacyPagerfantaNormalizer;
+use Composer\InstalledVersions;
 use JMS\SerializerBundle\JMSSerializerBundle;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
+use Matthias\SymfonyDependencyInjectionTest\PhpUnit\DefinitionDecoratesConstraint;
 use Pagerfanta\Twig\Extension\PagerfantaExtension;
 use Pagerfanta\View\ViewFactoryInterface;
 use Symfony\Bundle\TwigBundle\DependencyInjection\TwigExtension;
 use Symfony\Bundle\TwigBundle\TwigBundle;
+use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 final class BabDevPagerfantaExtensionTest extends AbstractExtensionTestCase
@@ -56,6 +60,18 @@ final class BabDevPagerfantaExtensionTest extends AbstractExtensionTestCase
         }
 
         $this->assertContainerBuilderHasService('pagerfanta.serializer.normalizer');
+
+        if (class_exists(InstalledVersions::class)) {
+            $version = InstalledVersions::getVersion('symfony/serializer');
+
+            if (null !== $version && version_compare($version, '6.3', '<')) {
+                // TODO - Fix upstream
+                // $this->assertContainerBuilderServiceDecoration('pagerfanta.serializer.normalizer.legacy', 'pagerfanta.serializer.normalizer');
+                self::assertThat($this->container, new DefinitionDecoratesConstraint('pagerfanta.serializer.normalizer.legacy', 'pagerfanta.serializer.normalizer'));
+            } else {
+                $this->assertContainerBuilderNotHasService('pagerfanta.serializer.normalizer.legacy');
+            }
+        }
     }
 
     public function testContainerIsLoadedWithDefaultConfigurationWhenTwigBundleIsInstalled(): void

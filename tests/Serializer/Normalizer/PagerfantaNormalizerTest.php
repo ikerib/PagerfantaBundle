@@ -2,6 +2,7 @@
 
 namespace BabDev\PagerfantaBundle\Tests\Serializer\Normalizer;
 
+use BabDev\PagerfantaBundle\Serializer\Normalizer\LegacyPagerfantaNormalizer;
 use BabDev\PagerfantaBundle\Serializer\Normalizer\PagerfantaNormalizer;
 use Pagerfanta\Adapter\FixedAdapter;
 use Pagerfanta\Adapter\NullAdapter;
@@ -36,6 +37,32 @@ final class PagerfantaNormalizerTest extends TestCase
         self::assertEquals($expectedResultArray, $serializer->normalize($pager));
     }
 
+    /**
+     * @group legacy
+     */
+    public function testNormalizeWithLegacyDecorator(): void
+    {
+        $pager = new Pagerfanta(
+            new NullAdapter(25),
+        );
+
+        $expectedResultArray = [
+            'items' => $pager->getCurrentPageResults(),
+            'pagination' => [
+                'current_page' => $pager->getCurrentPage(),
+                'has_previous_page' => $pager->hasPreviousPage(),
+                'has_next_page' => $pager->hasNextPage(),
+                'per_page' => $pager->getMaxPerPage(),
+                'total_items' => $pager->getNbResults(),
+                'total_pages' => $pager->getNbPages(),
+            ],
+        ];
+
+        $serializer = new Serializer([new LegacyPagerfantaNormalizer(new PagerfantaNormalizer())]);
+
+        self::assertEquals($expectedResultArray, $serializer->normalize($pager));
+    }
+
     public function testNormalizeOnlyAcceptsPagerfantaInstances(): void
     {
         $this->expectException(InvalidArgumentException::class);
@@ -58,9 +85,12 @@ final class PagerfantaNormalizerTest extends TestCase
         self::assertSame($supported, (new PagerfantaNormalizer())->supportsNormalization($data));
     }
 
+    /**
+     * @group legacy
+     */
     public function testHasCacheableSupportsMethod(): void
     {
-        self::assertTrue((new PagerfantaNormalizer())->hasCacheableSupportsMethod());
+        self::assertTrue((new LegacyPagerfantaNormalizer(new PagerfantaNormalizer()))->hasCacheableSupportsMethod());
     }
 
     public function testItSerializesIterableData(): void
