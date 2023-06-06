@@ -6,9 +6,14 @@ use Symfony\Component\Serializer\Normalizer\CacheableSupportsMethodInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
+/**
+ * Decorator for {@see PagerfantaNormalizer} implementing the legacy {@CacheableSupportsMethodInterface} for older Symfony version support.
+ *
+ * @internal
+ */
 final class LegacyPagerfantaNormalizer implements NormalizerInterface, CacheableSupportsMethodInterface, NormalizerAwareInterface
 {
-    public function __construct(private PagerfantaNormalizer $normalizer)
+    public function __construct(private readonly PagerfantaNormalizer $normalizer)
     {
     }
 
