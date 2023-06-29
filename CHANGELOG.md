@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.2.1 (2023-06-29)
+
+- [#55](https://github.com/BabDev/PagerfantaBundle/pull/55) Fix deprecation in the LegacyPagerfantaNormalizer
+
 ## 4.2.0 (2023-06-05)
 
 - [#54](https://github.com/BabDev/PagerfantaBundle/pull/54) Introduce LegacyPagerfantaNormalizer to better address Symfony 6.3 serializer deprecations
