@@ -7,7 +7,7 @@ All of the views provided in the `pagerfanta/core` package are available by defa
 The below table lists the view names and the corresponding class. 
 
 | View Name            | Class Name                              |
-| -------------------- | --------------------------------------- |
+|----------------------|-----------------------------------------|
 | `default`            | `Pagerfanta\View\DefaultView`           |
 | `foundation6`        | `Pagerfanta\View\Foundation6View`       |
 | `semantic_ui`        | `Pagerfanta\View\SemanticUiView`        |
@@ -18,12 +18,12 @@ The below table lists the view names and the corresponding class.
 
 ## Twig View
 
-This bundle provides a Pagerfanta view which renders a Twig template.
+This bundle provides a Pagerfanta view which renders a Twig template. If you have not already, you will need to install the `pagerfanta/twig` package.
 
 The below table lists the available templates and the CSS framework they correspond to.
 
 | Template Name                                    | Framework                                                     |
-| ------------------------------------------------ | ------------------------------------------------------------- |
+|--------------------------------------------------|---------------------------------------------------------------|
 | `@BabDevPagerfanta/default.html.twig`            | None (Pagerfanta's default view)                              |
 | `@BabDevPagerfanta/foundation6.html.twig`        | [Foundation](https://get.foundation/index.html) (version 6.x) |
 | `@BabDevPagerfanta/semantic_ui.html.twig`        | [Semantic UI](https://semantic-ui.com) (version 2.x)          |
