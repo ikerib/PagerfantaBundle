@@ -4,8 +4,8 @@ namespace BabDev\PagerfantaBundle\Serializer\Handler;
 
 use JMS\Serializer\GraphNavigatorInterface;
 use JMS\Serializer\Handler\SubscribingHandlerInterface;
+use JMS\Serializer\JsonSerializationVisitor;
 use JMS\Serializer\SerializationContext;
-use JMS\Serializer\Visitor\SerializationVisitorInterface;
 use Pagerfanta\Pagerfanta;
 use Pagerfanta\PagerfantaInterface;
 
@@ -34,7 +34,7 @@ final class PagerfantaHandler implements SubscribingHandlerInterface
      *
      * @return array<string, mixed>|\ArrayObject<string, mixed>
      */
-    public function serializeToJson(SerializationVisitorInterface $visitor, PagerfantaInterface $pagerfanta, array $type, SerializationContext $context)
+    public function serializeToJson(JsonSerializationVisitor $visitor, PagerfantaInterface $pagerfanta, array $type, SerializationContext $context)
     {
         return $visitor->visitArray(
             [
