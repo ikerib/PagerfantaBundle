@@ -9,8 +9,8 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        php: ['8.1', '8.2']
-        symfony: ['5.4.*', '6.2.*', '6.3.*']
+        php: ['8.1', '8.2', '8.3']
+        symfony: ['5.4.*', '6.3.*', '6.4.*', '7.0.*']
         pagerfanta: ['']
         composer-flags: ['--prefer-stable']
         can-fail: [false]
@@ -18,7 +18,7 @@ jobs:
         include:
           # Run "no Twig" build on latest PHP and Symfony LTS
           - php: '8.2'
-            symfony: '5.4.*'
+            symfony: '6.4.*'
             composer-flags: '--prefer-stable'
             can-fail: false
             with-twig: false
@@ -27,6 +27,9 @@ jobs:
             composer-flags: '--prefer-stable --prefer-lowest'
             can-fail: false
             with-twig: true
+        exclude:
+          - php: '8.1'
+            symfony: '7.0.*'
 
     name: "PHP ${{ matrix.php }}${{ matrix.pagerfanta != '' && format(' - Pagerfanta {0}', matrix.pagerfanta) || '' }}${{ matrix.with-twig == false && ' - Without Twig' || '' }} - Symfony ${{ matrix.symfony }}${{ matrix.composer-flags != '' && format(' - Composer {0}', matrix.composer-flags) || '' }}"
 
