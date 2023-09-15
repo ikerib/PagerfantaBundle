@@ -16,8 +16,7 @@ final class RequestAwareRouteGeneratorFactory implements RouteGeneratorFactoryIn
         private readonly UrlGeneratorInterface $router,
         private readonly RequestStack $requestStack,
         private readonly PropertyAccessorInterface $propertyAccessor
-    ) {
-    }
+    ) {}
 
     public function create(array $options = []): RouteGeneratorInterface
     {

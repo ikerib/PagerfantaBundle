@@ -76,10 +76,7 @@ final class ContainerBackedImmutableViewFactoryTest extends TestCase
             /**
              * @param array<string, ViewInterface> $views
              */
-            public function __construct(
-                private readonly array $views,
-            ) {
-            }
+            public function __construct(private readonly array $views) {}
 
             public function get(string $id)
             {

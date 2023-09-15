@@ -16,8 +16,7 @@ final class ContainerBackedImmutableViewFactory implements ViewFactoryInterface
     public function __construct(
         private readonly ContainerInterface $container,
         private readonly array $serviceMap,
-    ) {
-    }
+    ) {}
 
     /**
      * @param array<string, ViewInterface> $views

@@ -4,6 +4,4 @@ namespace BabDev\PagerfantaBundle\Exception;
 
 use Pagerfanta\Exception\RuntimeException;
 
-final class ImmutableViewFactoryException extends RuntimeException
-{
-}
+final class ImmutableViewFactoryException extends RuntimeException {}

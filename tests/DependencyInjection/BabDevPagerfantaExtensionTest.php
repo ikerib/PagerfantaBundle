@@ -5,7 +5,6 @@ namespace BabDev\PagerfantaBundle\Tests\DependencyInjection;
 use BabDev\PagerfantaBundle\BabDevPagerfantaBundle;
 use BabDev\PagerfantaBundle\DependencyInjection\BabDevPagerfantaExtension;
 use BabDev\PagerfantaBundle\DependencyInjection\Configuration;
-use BabDev\PagerfantaBundle\Serializer\Normalizer\LegacyPagerfantaNormalizer;
 use Composer\InstalledVersions;
 use JMS\SerializerBundle\JMSSerializerBundle;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
@@ -14,7 +13,6 @@ use Pagerfanta\Twig\Extension\PagerfantaExtension;
 use Pagerfanta\View\ViewFactoryInterface;
 use Symfony\Bundle\TwigBundle\DependencyInjection\TwigExtension;
 use Symfony\Bundle\TwigBundle\TwigBundle;
-use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 final class BabDevPagerfantaExtensionTest extends AbstractExtensionTestCase
