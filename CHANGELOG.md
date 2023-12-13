@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.3.0 (2023-12-12)
+
+- Add support for Symfony 7
+
 ## 4.2.1 (2023-06-29)
 
 - [#55](https://github.com/BabDev/PagerfantaBundle/pull/55) Fix deprecation in the LegacyPagerfantaNormalizer
