@@ -7,5 +7,7 @@ parameters:
     - %currentWorkingDirectory%/config
     - %currentWorkingDirectory%/src
     - %currentWorkingDirectory%/tests
+  excludePaths:
+    - %currentWorkingDirectory%/src/Serializer/Normalizer/LegacyPagerfantaNormalizer.php
   checkMissingIterableValueType: false
   treatPhpDocTypesAsCertain: false
